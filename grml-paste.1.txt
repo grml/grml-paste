@@ -1,0 +1,42 @@
+grml-paste(1)
+=============
+
+Name
+----
+grml-paste - command line interface for paste.grml.org
+
+Synopsis
+--------
+grml-paste [-n nick] [-s summary] [-f source] [-h|--help]
+
+Description
+-----------
+
+grml-paste is a command line interface for uploading plain text to http://paste.grml.org/
+
+Options
+-------
+
+  -n **nick**::
+
+Set your nickname (defaults to Anonymous).
+
+  -s **summary**::
+
+Specify a summary of your paste (defaults to none).
+
+  -f *source**::
+
+Sets the file to read from, use - to read from stdin.
+
+  --help::
+
+Print help text.
+
+Bugs
+----
+Please report feedback, link:http://grml.org/bugs/[bugreports] and wishes link:http://grml.org/contact/[to us]!
+
+Authors
+-------
+Nico Golde <nico@grml.org>

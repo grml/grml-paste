@@ -1,0 +1,75 @@
+#!/usr/bin/env ruby
+# Filename:      grml-paste
+# Purpose:       paste files to the online grml paste bot
+# Authors:       grml-team (grml.org), (c) 2007 Nico Golde <nico@grml.org>
+# Bug-Reports:   see http://grml.org/bugs/
+# License:       This file is licensed under the GPL v2
+##########################################################################
+
+require 'uri'
+require 'net/http'
+
+url = URI.parse('http://paste.grml.org/paste')
+
+def usage
+	$stderr.puts "usage: #{$0} [-n nick] [-s summary] [-f source] [-h|--help]\n"
+	$stderr.puts "\t -n <nick>\tset your nickname (defaults to Anonymuos)"
+	$stderr.puts "\t -s <summary>\tspecify a summary of your paste (defaults to none)"
+	$stderr.puts "\t -f <source>\tsets the file to read from, you don't need this for reading from stdin"
+	$stderr.puts "\t --help\t\tprint this help"
+	Kernel.exit(1)
+end
+
+file    = nil
+summary = "none"
+nick    = "Anonymous"
+channel = "#grml"
+text    = ""
+
+ARGV.each_index do |i|
+	if ARGV[i] == '-h' or ARGV[i] == '--help' then
+		usage
+	elsif ARGV[i] == '-n' and ARGV[i+1] != nil then
+		nick = ARGV[i+1]
+	elsif ARGV[i] == '-s' and ARGV[i+1] != nil then
+		summary = ARGV[i+1]
+	elsif ARGV[i] == '-f' and ARGV[i+1] != nil then
+		file = ARGV[i+1]
+	end
+end
+
+if file == nil or file == "-"
+	f = STDIN
+else
+	begin
+		f = File.open(file)
+	rescue
+		$stderr.puts "Error: couldn't open file: #{file}"
+		Kernel.exit(1)
+	end
+end
+
+f.each_line do |line|
+	text << line
+end
+
+begin
+	res = Net::HTTP.post_form(url,{'Paste it' => 'Paste it', 'paste' => text, 'channel' => channel,  'summary' => summary, 'nick' => nick})
+rescue
+	$stderr.puts "Unable to post HTTP request"
+	Kernel.exit(1)
+end
+
+results = res.body.scan(/<a href='http:\/\/paste.grml.org\/[0-9]+'/)
+result = ""
+if results.size > 0 then
+	result = results[0].sub(/<a href='(http:\/\/paste.grml.org\/[0-9]+)'/, '\1')
+end
+
+if result == "" then
+	print "Failed to paste, please retry\n"
+else
+	print "You can find your paste on: " + result + "\n"
+end
+
+## END OF FILE #################################################################
