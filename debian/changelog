@@ -1,3 +1,10 @@
+grml-paste (0.2) unstable; urgency=low
+
+  [Nico Golde]
+  * Fix typo in manpage (adding * to fix unconstrained strong text).
+
+ -- Michael Prokop <mika@grml.org>  Sun, 16 Dec 2007 17:41:18 +0100
+
 grml-paste (0.1) unstable; urgency=low
 
   * Initial release.

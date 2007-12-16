@@ -25,7 +25,7 @@ Set your nickname (defaults to Anonymous).
 
 Specify a summary of your paste (defaults to none).
 
-  -f *source**::
+  -f **source**::
 
 Sets the file to read from, use - to read from stdin.
 
