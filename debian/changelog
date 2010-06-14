@@ -1,3 +1,14 @@
+grml-paste (0.3) unstable; urgency=low
+
+  [ Michael Gebetsroither ]
+  * Makefile: posix compat fix
+
+  [ Michael Prokop ]
+  * Switch to python based grml-paste by Gebi for new
+    paste.grml.org service.
+
+ -- Michael Prokop <mika@grml.org>  Mon, 14 Jun 2010 14:28:45 +0200
+
 grml-paste (0.2) unstable; urgency=low
 
   [Nico Golde]
