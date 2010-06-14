@@ -21,7 +21,7 @@ clean:
 	dh_testroot
 	rm -f build-stamp
 
-	-$(MAKE) clean
+	$(MAKE) clean
 	dh_clean 
 
 install: build
@@ -32,12 +32,12 @@ install: build
 
 	install -m 755 grml-paste debian/grml-paste/usr/bin/grml-paste
 
-# Build architecture-independent files here.
-binary-indep: build install
-# We have nothing to do by default.
-
 # Build architecture-dependent files here.
 binary-arch: build install
+# We have nothing to do by default.
+
+# Build architecture-independent files here.
+binary-indep: build install
 	dh_testdir
 	dh_testroot
 	dh_installchangelogs 

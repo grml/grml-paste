@@ -1,16 +1,17 @@
 Source: grml-paste
-Section: utils
+Section: grml
 Priority: extra
 Maintainer: Michael Prokop <mika@grml.org>
 Build-Depends: debhelper (>= 5)
-Standards-Version: 3.7.2
-Homepage: http://hg.grml.org/grml-paste/
-XS-Vcs-hg: http://hg.grml.org/grml-paste/
-XS-Vcs-Browser: http://hg.grml.org/grml-paste/
+Standards-Version: 3.8.4
+Homepage: http://git.grml.org/?p=grml-paste.git
+Vcs-git: git://git.grml.org/grml-paste.git
+Vcs-Browser: http://git.grml.org/?p=grml-paste.git
 
 Package: grml-paste
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, ruby
+Depends: ${shlibs:Depends}, ${misc:Depends}, python
 Description: command line interface for paste.grml.org
- grml-paste is a command line interface for uploading
- plain text to  http://paste.grml.org/
+ This package provides a command line interface tool to upload
+ plain text to http://paste.grml.org/ - being the official paste
+ service for Grml.org.

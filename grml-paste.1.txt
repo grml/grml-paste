@@ -7,7 +7,7 @@ grml-paste - command line interface for paste.grml.org
 
 Synopsis
 --------
-grml-paste [-n nick] [-s summary] [-f source] [-h|--help]
+grml-paste [options] ACTION <args>
 
 Description
 -----------
@@ -17,26 +17,57 @@ grml-paste is a command line interface for uploading plain text to http://paste.
 Options
 -------
 
-  -n **nick**::
+  **-e 'hours', --expire='HOURS'**::
 
-Set your nickname (defaults to Anonymous).
+Time at wich paste should expire.
 
-  -s **summary**::
-
-Specify a summary of your paste (defaults to none).
-
-  -f **source**::
-
-Sets the file to read from, use - to read from stdin.
-
-  --help::
+  **-h, --help**::
 
 Print help text.
 
+  **-l 'lang', --lang='LANG'**::
+
+Type of language to highlight.
+
+  **-n 'name', --name='NAME'**::
+
+Set your nickname (defaults to anonymous).
+
+  **-s 'server', --server='SERVER'**::
+
+Set URL of paste server (defaults to paste.grml.org).
+
+  **-v, --verbose**::
+
+More verbose output.
+
+Actions
+-------
+
+  **add**::
+
+Add paste to the server: <1.line> <2.line> ...
+
+  **del '<digest>'*::
+
+Delete paste from server.
+
+ **get '<id>'**::
+
+Get paste from server.
+
+  **getlangs**::
+
+Get supported language highlighting types from server.
+
+  **help <action>**::
+
+Print more verbose help about specified '<action>'.
+
 Bugs
 ----
-Please report feedback, link:http://grml.org/bugs/[bugreports] and wishes link:http://grml.org/contact/[to us]!
+Please report feedback, link:http://grml.org/bugs/[bugreports] and wishes link:http://grml.org/contact/[to the grml team].
 
 Authors
 -------
-Nico Golde <nico@grml.org>
+Michael Gebetsroither <gebi@grml.org>
