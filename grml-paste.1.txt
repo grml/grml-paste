@@ -31,9 +31,13 @@ Type of language to highlight.
 
   **-n 'name', --name='NAME'**::
 
-Set your nickname (defaults to anonymous).
+Set your nickname (defaults to login username).
 
   **-s 'server', --server='SERVER'**::
+
+Make private submission to server, thus your paste is not visible on the webpage.
+
+  **-p, --private**::
 
 Set URL of paste server (defaults to paste.grml.org).
 
@@ -48,13 +52,25 @@ Actions
 
 Add paste to the server: <1.line> <2.line> ...
 
-  **del '<digest>'*::
+  **del '<digest>'**::
 
 Delete paste from server.
 
  **get '<id>'**::
 
 Get paste from server.
+
+ **addurl '<url>'**::
+
+Add short-URL.
+
+ **geturl '<url>'**::
+
+Resolve short-URL.
+
+ **getclicks '<url>'**::
+
+Get clicks of short-URL.
 
   **getlangs**::
 
