@@ -1,3 +1,14 @@
+grml-paste (0.4) unstable; urgency=low
+
+  [ Michael Gebetsroither ]
+  * [198831f] upgrade to upstream version pre1.0
+  * [b25e0d9] document new features in manpage
+
+  [ Michael Prokop ]
+  * [647e7b7] Bump Standards-Version to 3.9.1.
+
+ -- Michael Prokop <mika@grml.org>  Wed, 24 Nov 2010 02:01:22 +0100
+
 grml-paste (0.3) unstable; urgency=low
 
   [ Michael Gebetsroither ]
