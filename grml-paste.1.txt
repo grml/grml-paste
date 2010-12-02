@@ -19,7 +19,7 @@ Options
 
   **-e 'hours', --expire='HOURS'**::
 
-Time at wich paste should expire.
+Time at which paste should expire.
 
   **-h, --help**::
 
@@ -35,11 +35,11 @@ Set your nickname (defaults to login username).
 
   **-s 'server', --server='SERVER'**::
 
-Make private submission to server, thus your paste is not visible on the webpage.
+Set URL of paste server (defaults to paste.grml.org).
 
   **-p, --private**::
 
-Set URL of paste server (defaults to paste.grml.org).
+Make private (hidden) submission to server, thus your paste is not visible on the webpage.
 
   **-v, --verbose**::
 
@@ -79,6 +79,17 @@ Get supported language highlighting types from server.
   **help <action>**::
 
 Print more verbose help about specified '<action>'.
+
+Usage examples
+--------------
+
+  **dmesg | tail | grml-paste add --name=grmluser**::
+
+Upload last ten lines of dmesg output as user 'grmluser'.
+
+  **grep -e EE -e WW /var/log/Xorg.0.log | grml-paste add -p**::
+
+Upload error and warning messages of X.org log as hidden entry.
 
 Bugs
 ----
