@@ -1,3 +1,10 @@
+grml-paste (0.5) unstable; urgency=low
+
+  * [438938f] manpage: provide usage example, fix typo and switch wrong
+    order of option descriptions [Closes: issue903]
+
+ -- Michael Prokop <mika@grml.org>  Thu, 02 Dec 2010 18:50:28 +0100
+
 grml-paste (0.4) unstable; urgency=low
 
   [ Michael Gebetsroither ]
