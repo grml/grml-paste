@@ -1,3 +1,12 @@
+grml-paste (0.6) unstable; urgency=low
+
+  [ Michael Gebetsroither ]
+  * [30469c3] do not strip leading whitespaces
+  * [043e210] add explicit hint on how to enable xmlrpc protocol
+    debugging
+
+ -- Michael Prokop <mika@grml.org>  Sun, 26 Dec 2010 23:27:12 +0100
+
 grml-paste (0.5) unstable; urgency=low
 
   * [438938f] manpage: provide usage example, fix typo and switch wrong
