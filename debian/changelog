@@ -1,3 +1,14 @@
+grml-paste (0.7) unstable; urgency=low
+
+  [ Christian Hofstaedtler ]
+  * [eb52327] Add debian/control headers Origin, Bugs
+
+  [ Michael Prokop ]
+  * [b04da76] Bump Standards-Version to 3.9.2
+  * [33c607e] Add asciidoc, xsltproc, docbook-xsl to Build-Depends-Indep
+
+ -- Michael Prokop <mika@grml.org>  Sat, 26 Nov 2011 19:54:50 +0100
+
 grml-paste (0.6) unstable; urgency=low
 
   [ Michael Gebetsroither ]
