@@ -2,8 +2,12 @@ Source: grml-paste
 Section: grml
 Priority: extra
 Maintainer: Michael Prokop <mika@grml.org>
-Build-Depends: debhelper (>= 5)
-Build-Depends-Indep: asciidoc, xsltproc, docbook-xsl
+Build-Depends:
+ debhelper (>= 5),
+Build-Depends-Indep:
+ asciidoc,
+ docbook-xsl,
+ xsltproc,
 Standards-Version: 4.5.0
 Homepage: https://git.grml.org/?p=grml-paste.git
 Vcs-git: git://git.grml.org/grml-paste.git
@@ -13,7 +17,10 @@ Bugs: mailto:bugs@grml.org
 
 Package: grml-paste
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, python3
+Depends:
+ python3,
+ ${misc:Depends},
+ ${shlibs:Depends},
 Description: command line interface for paste.grml.org
  This package provides a command line interface tool to upload
  plain text to https://paste.grml.org/ - being the official paste
