@@ -5,11 +5,11 @@
 # License:       This file is licensed under the GPL v2.
 ################################################################################
 
+import getpass
+import inspect
+import optparse
 import sys
 from xmlrpc.client import ServerProxy
-import optparse
-import inspect
-import getpass
 
 # program defaults
 DEFAULT_SERVER = "https://paste.grml.org/server.pl"
@@ -32,11 +32,11 @@ class ActionFailedException(Exception):
 
 def _paste(opts):
     """Get paste proxy object"""
-    return (ServerProxy(opts.server, verbose=False).paste)
+    return ServerProxy(opts.server, verbose=False).paste
 
 
 def _check_success(return_data):
-    """Check if call was successful, raise AcitonFailedException otherwise"""
+    """Check if call was successful, raise ActionFailedException otherwise"""
     if return_data["rc"] != 0:
         raise ActionFailedException(return_data["statusmessage"], return_data)
     return return_data
@@ -52,7 +52,11 @@ def action_add_paste(opts, code):
     if len(code) == 0:
         code = [line.rstrip() for line in sys.stdin.readlines()]
     code = "\n".join(code)
-    result = _check_success(_paste(opts).addPaste(code, opts.name, opts.expire * 3600, opts.lang, opts.private))
+    result = _check_success(
+        _paste(opts).addPaste(
+            code, opts.name, opts.expire * 3600, opts.lang, opts.private
+        )
+    )
     return result["statusmessage"], result
 
 
@@ -125,7 +129,10 @@ def action_help(opts, args):
     if alias in actions:
         function_name = actions[alias]
         print(inspect.getdoc(globals()[function_name]))
-        print("\naliases: " + " ".join([i for i in actions_r[function_name] if i != alias]))
+        print(
+            "\naliases: "
+            + " ".join([i for i in actions_r[function_name] if i != alias])
+        )
     else:
         print("Error: No such command - %s" % (alias))
         OPT_PARSER.print_usage()
@@ -155,7 +162,7 @@ if __name__ == "__main__":
         "action_add_short_url addurl",
         "action_get_short_url geturl",
         "action_get_short_url_clicks getclicks",
-        "action_help     help"
+        "action_help     help",
     ]
     for action_spec in action_specs:
         aliases = action_spec.split()
@@ -165,20 +172,40 @@ if __name__ == "__main__":
         for i in v:
             actions[i] = action_name
 
-    usage = "usage: %prog [options] ACTION <args>\n\n" +\
-            "actions:\n" +\
-            "\n".join(["%12s\t%s" % (v[0], inspect.getdoc(globals()[action_name]).splitlines()[0])
-                      for (action_name, v) in actions_r.items()])
+    usage = (
+        "usage: %prog [options] ACTION <args>\n\n"
+        + "actions:\n"
+        + "\n".join(
+            [
+                "%12s\t%s"
+                % (v[0], inspect.getdoc(globals()[action_name]).splitlines()[0])
+                for (action_name, v) in actions_r.items()
+            ]
+        )
+    )
     running_user = getpass.getuser()
     parser = optparse.OptionParser(usage=usage)
     parser.add_option("-n", "--name", default=running_user, help="Name of poster")
-    parser.add_option("-e", "--expire", type=int, default=72, metavar="HOURS",
-                      help="Time at wich paste should expire")
-    parser.add_option("-l", "--lang", default="Plain", help="Type of language to highlight")
-    parser.add_option("-p", "--private", action="count", dest="private", default=0,
-                      help="Create hidden paste"),
-    parser.add_option("-s", "--server", default=DEFAULT_SERVER,
-                      help="Paste server")
+    parser.add_option(
+        "-e",
+        "--expire",
+        type=int,
+        default=72,
+        metavar="HOURS",
+        help="Time at which paste should expire",
+    )
+    parser.add_option(
+        "-l", "--lang", default="Plain", help="Type of language to highlight"
+    )
+    parser.add_option(
+        "-p",
+        "--private",
+        action="count",
+        dest="private",
+        default=0,
+        help="Create hidden paste",
+    ),
+    parser.add_option("-s", "--server", default=DEFAULT_SERVER, help="Paste server")
     parser.add_option("-v", "--verbose", action="count", default=0, help="More output")
     (opts, args) = parser.parse_args()
     OPT_PARSER = parser
