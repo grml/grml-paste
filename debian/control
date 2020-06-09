@@ -5,9 +5,9 @@ Maintainer: Michael Prokop <mika@grml.org>
 Build-Depends: debhelper (>= 5)
 Build-Depends-Indep: asciidoc, xsltproc, docbook-xsl
 Standards-Version: 4.5.0
-Homepage: http://git.grml.org/?p=grml-paste.git
+Homepage: https://git.grml.org/?p=grml-paste.git
 Vcs-git: git://git.grml.org/grml-paste.git
-Vcs-Browser: http://git.grml.org/?p=grml-paste.git
+Vcs-Browser: https://git.grml.org/?p=grml-paste.git
 Origin: Grml
 Bugs: mailto:bugs@grml.org
 
@@ -16,5 +16,5 @@ Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, python3
 Description: command line interface for paste.grml.org
  This package provides a command line interface tool to upload
- plain text to http://paste.grml.org/ - being the official paste
+ plain text to https://paste.grml.org/ - being the official paste
  service for Grml.org.
