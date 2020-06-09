@@ -12,15 +12,19 @@ import inspect
 import getpass
 
 # program defaults
-DEFAULT_SERVER='http://paste.grml.org/server.pl'
+DEFAULT_SERVER = 'http://paste.grml.org/server.pl'
+
 
 class ActionFailedException(Exception):
     '''Thrown if server returned an error'''
+
     def __init__(self, errormsg, ret):
         Exception.__init__(self, errormsg, ret)
+
     def what(self):
         '''Get errormessage'''
         return self.args[0]
+
     def dwhat(self):
         '''Get more verbose errormessage'''
         return self.args[1]
@@ -59,11 +63,11 @@ class Action(object):
         o = self.opts_
         code = self.args_
         if len(self.args_) == 0:
-            code = [ i.rstrip() for i in sys.stdin.readlines() ]
+            code = [i.rstrip() for i in sys.stdin.readlines()]
         code = '\n'.join(code)
         result = self._callProxy(lambda s: s.paste.addPaste(code, o.name, o.expire * 3600, o.lang, o.private),
-                            server)
-        return (result['statusmessage'], result)
+                                 server)
+        return result['statusmessage'], result
 
     def actionDelPaste(self):
         '''Delete paste from server: <digest>
@@ -72,21 +76,21 @@ class Action(object):
         '''
         digest = self.args_.pop(0)
         result = self._callProxy(lambda s: s.paste.deletePaste(digest))
-        return (result['statusmessage'], result)
+        return result['statusmessage'], result
 
     def actionGetPaste(self):
         '''Get paste from server: <id>
 
         <id>        Id of paste you want to receive.
         '''
-        id = self.args_.pop(0)
-        result = self._callProxy(lambda s: s.paste.getPaste(id))
-        return (result['code'], result)
+        paste_id = self.args_.pop(0)
+        result = self._callProxy(lambda s: s.paste.getPaste(paste_id))
+        return result['code'], result
 
     def actionGetLangs(self):
         '''Get supported language highlighting types from server'''
         result = self._callProxy(lambda s: s.paste.getLanguages())
-        return ('\n'.join(result['langs']), result)
+        return '\n'.join(result['langs']), result
 
     def actionAddShortUrl(self):
         '''Add short-URL: <url>
@@ -95,7 +99,7 @@ class Action(object):
         '''
         url = self.args_.pop(0)
         result = self._callProxy(lambda s: s.paste.addShortURL(url))
-        return (result['url'], result)
+        return result['url'], result
 
     def actionGetShortUrl(self):
         '''Resolve short-URL: <url>
@@ -113,7 +117,7 @@ class Action(object):
         '''
         url = self.args_.pop(0)
         result = self._callProxy(lambda s: s.paste.ShortURLClicks(url))
-        return (result['count'], result)
+        return result['count'], result
 
     def actionHelp(self):
         '''Print more verbose help about specific action: <action>
@@ -140,7 +144,7 @@ actions_r = {}
 
 # add -> actionAddPaste
 # a   -> actionAddPaste
-actions   = {}
+actions = {}
 
 # option parser
 OPT_PARSER = None
@@ -162,24 +166,24 @@ if __name__ == "__main__":
         aliases = i.split()
         cmd = aliases.pop(0)
         actions_r[cmd] = aliases
-    for (k,v) in actions_r.items():
+    for (k, v) in actions_r.items():
         for i in v:
             actions[i] = k
 
     usage = "usage: %prog [options] ACTION <args>\n\n" +\
             "actions:\n" +\
-            "\n".join(["%12s\t%s" % (v[0], inspect.getdoc(getattr(Action, k)).split('\n')[0]) \
-                for (k,v) in actions_r.items()])
+            "\n".join(["%12s\t%s" % (v[0], inspect.getdoc(getattr(Action, k)).split('\n')[0])
+                      for (k, v) in actions_r.items()])
     running_user = getpass.getuser()
     parser = optparse.OptionParser(usage=usage)
     parser.add_option('-n', '--name', default=running_user, help="Name of poster")
     parser.add_option('-e', '--expire', type=int, default=72, metavar='HOURS',
-            help='Time at wich paste should expire')
+                      help='Time at wich paste should expire')
     parser.add_option('-l', '--lang', default='Plain', help='Type of language to highlight')
     parser.add_option("-p", "--private", action="count", dest="private", default=0,
-                        help='Create hidden paste'),
+                      help='Create hidden paste'),
     parser.add_option('-s', '--server', default=DEFAULT_SERVER,
-            help='Paste server')
+                      help='Paste server')
     parser.add_option('-v', '--verbose', action='count', default=0, help='More output')
     (opts, args) = parser.parse_args()
     OPT_PARSER = parser
@@ -197,7 +201,7 @@ if __name__ == "__main__":
                 print(ret)
         except ActionFailedException as e:
             sys.stderr.write('Server Error: %s\n' % e.what())
-            if opts.verbose >0:
+            if opts.verbose > 0:
                 print(e.dwhat())
             sys.exit(1)
     else:
