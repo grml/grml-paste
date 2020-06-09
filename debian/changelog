@@ -1,3 +1,25 @@
+grml-paste (0.8) unstable; urgency=medium
+
+  [ Chris Hofstaedtler ]
+  * [c9d9ead] Minimal port to python3
+  * [0ac3419] chore: make flake8 happy
+  * [be08904] chore: use consistent quote style
+  * [7d13ed6] chore: remove useless use of OOP
+
+  [ Michael Prokop ]
+  * [5a3c1c2] Switch from http to https by default
+  * [c0acd32] chore: run black + isort to unify coding style
+  * [fe034fc] debian: bump Standards-Version to 4.5.0
+  * [0e76b31] debian: use https everywhere
+  * [2d2f68d] debian: run wrap-and-sort
+  * [97575d8] debian: switch to minimal debhelper style
+  * [7c75a1e] debian: bump compat version and switch to debhelper-compat
+    approach
+  * [f2eb654] debian: add debian/source/format
+  * [efd707e] debian: move priority from extra to optional
+
+ -- Michael Prokop <mika@grml.org>  Tue, 09 Jun 2020 22:27:30 +0200
+
 grml-paste (0.7) unstable; urgency=low
 
   [ Christian Hofstaedtler ]
