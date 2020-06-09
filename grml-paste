@@ -12,7 +12,7 @@ import inspect
 import getpass
 
 # program defaults
-DEFAULT_SERVER = "http://paste.grml.org/server.pl"
+DEFAULT_SERVER = "https://paste.grml.org/server.pl"
 
 
 class ActionFailedException(Exception):

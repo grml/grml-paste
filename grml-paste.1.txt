@@ -12,7 +12,7 @@ grml-paste [options] ACTION <args>
 Description
 -----------
 
-grml-paste is a command line interface for uploading plain text to http://paste.grml.org/
+grml-paste is a command line interface for uploading plain text to https://paste.grml.org/
 
 Options
 -------
@@ -93,7 +93,7 @@ Upload error and warning messages of X.org log as hidden entry.
 
 Bugs
 ----
-Please report feedback, link:http://grml.org/bugs/[bugreports] and wishes link:http://grml.org/contact/[to the grml team].
+Please report feedback, link:https://grml.org/bugs/[bugreports] and wishes link:https://grml.org/contact/[to the grml team].
 
 Authors
 -------
