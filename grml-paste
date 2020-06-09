@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # Filename:      grml-paste
 # Purpose:       XmlRpc interface client to paste.grml.org
 # Author:        Michael Gebetsroither <gebi@grml.org>
@@ -6,7 +6,7 @@
 ################################################################################
 
 import sys
-import xmlrpclib
+from xmlrpc.client import ServerProxy
 import optparse
 import inspect
 import getpass
@@ -32,7 +32,7 @@ class Action(object):
         self.opts_ = opts
 
     def _createProxy(self):
-        return xmlrpclib.ServerProxy(self.opts_.server, verbose=False)
+        return ServerProxy(self.opts_.server, verbose=False)
 
     def _callProxy(self, functor, server=None):
         '''Wrapper for xml-rpc calls to server which throws an
@@ -127,10 +127,10 @@ class Action(object):
 
         if alias in actions:
             fun = actions[alias]
-            print inspect.getdoc(self.__getattribute__(fun))
-            print "\naliase: " + " ".join([i for i in actions_r[fun] if i != alias])
+            print(inspect.getdoc(self.__getattribute__(fun)))
+            print("\naliase: " + " ".join([i for i in actions_r[fun] if i != alias]))
         else:
-            print "Error: No such command - %s" % (alias)
+            print("Error: No such command - %s" % (alias))
             OPT_PARSER.print_usage()
         sys.exit(0)
 
@@ -192,13 +192,13 @@ if __name__ == "__main__":
         try:
             (msg, ret) = action.call(actions[cmd])
             if opts.verbose == 0:
-                print msg
+                print(msg)
             else:
-                print ret
-        except ActionFailedException, e:
+                print(ret)
+        except ActionFailedException as e:
             sys.stderr.write('Server Error: %s\n' % e.what())
             if opts.verbose >0:
-                print e.dwhat()
+                print(e.dwhat())
             sys.exit(1)
     else:
         parser.error('Unknown action: %s' % args[0])
