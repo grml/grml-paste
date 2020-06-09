@@ -13,7 +13,7 @@ Bugs: mailto:bugs@grml.org
 
 Package: grml-paste
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, python
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3
 Description: command line interface for paste.grml.org
  This package provides a command line interface tool to upload
  plain text to http://paste.grml.org/ - being the official paste

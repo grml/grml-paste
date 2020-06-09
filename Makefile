@@ -21,3 +21,5 @@ clean:
 	@for i in $(MANPAGES); do \
 		rm -f $$i.html $$i.xml $$i.gz; done
 
+lint:
+	flake8 --max-line-length=120 grml-paste
