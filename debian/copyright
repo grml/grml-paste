@@ -1,27 +1,19 @@
-This package was debianized by Michael Prokop <mika@grml.org> on
-Thu, 13 Dec 2007 11:17:35 +0100.
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: grml-paste
+Upstream-Contact: Michael Prokop <mika@grml.org>
+Source: https://github.com/grml/grml-paste
 
-It was downloaded from https://grml.org/
+Files: *
+Copyright: 2007-2024 Michael Prokop <mika@grml.org>
+License: GPL-2
 
-Copyright Holder: grml-team (grml.org), Michael Gebetsroither <gebi@grml.org>
+Files: grml-paste
+Copyright:
+  2010 Michael Gebetsroither <michael@mgeb.org>
+  2020 Chris Hofstaedtler <chris@hofstaedtler.name>
+  2020 Michael Prokop <mika@grml.org>
+License: GPL-2
 
-License:
-
-   This package is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; version 2 dated June, 1991.
-
-   This package is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this package; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
-
-On Debian systems, the complete text of the GNU General
-Public License can be found in `/usr/share/common-licenses/GPL-2'.
-
-The Debian packaging is © 2007, 2010, 2020 Michael Prokop <mika@grml.org> and
-is licensed under the GPL, see above.
+License: GPL-2
+ On Debian systems the full text of the GNU General Public License can be
+ found in the `/usr/share/common-licenses/GPL-2' file.
