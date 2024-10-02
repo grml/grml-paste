@@ -12,7 +12,7 @@ import sys
 from xmlrpc.client import ServerProxy
 
 # program defaults
-DEFAULT_SERVER = "https://paste.grml.org/server.pl"
+DEFAULT_SERVER = "https://paste.debian.net/server.pl"
 
 
 class ActionFailedException(Exception):
