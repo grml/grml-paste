@@ -1,3 +1,11 @@
+grml-paste (0.9.1) unstable; urgency=medium
+
+  * [95fcdb1] Update Homepage and VCs-* headers for switch to github.com
+  * [f5c6c05] Convert debian/copyright to machine-readable format
+  * [9f349d4] Bump Standards-Version to 4.7.0
+
+ -- Michael Prokop <mika@grml.org>  Wed, 02 Oct 2024 19:05:57 +0200
+
 grml-paste (0.9) unstable; urgency=medium
 
   [ Chris Hofstaedtler ]
