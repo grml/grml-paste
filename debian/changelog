@@ -1,3 +1,13 @@
+grml-paste (0.9.2) unstable; urgency=medium
+
+  [ Chris Hofstaedtler ]
+  * [547b61c] debian: normalize Vcs-Git
+
+  [ Michael Prokop ]
+  * [d2d8118] Ship debian/gbp.conf for gbp usage
+
+ -- Michael Prokop <mika@grml.org>  Fri, 22 Nov 2024 15:26:20 +0100
+
 grml-paste (0.9.1) unstable; urgency=medium
 
   * [95fcdb1] Update Homepage and VCs-* headers for switch to github.com
