@@ -4,16 +4,30 @@ Upstream-Contact: Michael Prokop <mika@grml.org>
 Source: https://github.com/grml/grml-paste
 
 Files: *
-Copyright: 2007-2024 Michael Prokop <mika@grml.org>
 License: GPL-2
+Copyright: 2007-2024 Michael Prokop <mika@grml.org>
 
-Files: grml-paste
+Files: grml-paste*
+License: GPL-2
 Copyright:
   2010 Michael Gebetsroither <michael@mgeb.org>
-  2020 Chris Hofstaedtler <chris@hofstaedtler.name>
-  2020 Michael Prokop <mika@grml.org>
+  2020, 2024 Chris Hofstaedtler <zeha@debian.org>
+  2007, 2010, 2020 Michael Prokop <mika@grml.org>
+
+Files: debian
 License: GPL-2
+Copyright: 2007-2024 Michael Prokop <mika@grml.org>
+           2024 Chris Hofstaedtler <zeha@debian.org>
 
 License: GPL-2
- On Debian systems the full text of the GNU General Public License can be
- found in the `/usr/share/common-licenses/GPL-2' file.
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; version 2 of the License.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ On Debian systems, the complete text of the GNU General
+ Public License can be found in `/usr/share/common-licenses/GPL-2'.
