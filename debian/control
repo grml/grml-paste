@@ -6,7 +6,7 @@ Uploaders:
  Michael Prokop <mika@debian.org>,
  Chris Hofstaedtler <zeha@debian.org>,
 Build-Depends:
- debhelper-compat (= 12),
+ debhelper-compat (= 13),
 Build-Depends-Indep:
  asciidoc,
  docbook-xsl,
