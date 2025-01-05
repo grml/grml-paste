@@ -1,3 +1,14 @@
+grml-paste (0.9.3) unstable; urgency=medium
+
+  * Team upload.
+  * [19d9dde] Update debian/copyright
+  * [21e4bd8] Drop obsolete header text from debian/rules
+  * [0beea39] Set Rules-Requires-Root: no
+  * [6161fb7] Prepare debian/control for Debian main
+  * [ce9c8f0] Bump debhelper-compat to v13
+
+ -- Chris Hofstaedtler <zeha@debian.org>  Sun, 05 Jan 2025 16:50:32 +0100
+
 grml-paste (0.9.2) unstable; urgency=medium
 
   [ Chris Hofstaedtler ]
