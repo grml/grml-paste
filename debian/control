@@ -1,20 +1,21 @@
 Source: grml-paste
-Section: grml
+Section: net
 Priority: optional
-Maintainer: Michael Prokop <mika@grml.org>
+Maintainer: Grml Team <team@grml.org>
+Uploaders:
+ Michael Prokop <mika@debian.org>,
+ Chris Hofstaedtler <zeha@debian.org>,
 Build-Depends:
- debhelper-compat (= 12),
+ debhelper-compat (= 13),
 Build-Depends-Indep:
  asciidoc,
  docbook-xsl,
  xsltproc,
 Standards-Version: 4.7.0
+Rules-Requires-Root: no
 Homepage: https://github.com/grml/grml-paste
 Vcs-Git: https://github.com/grml/grml-paste.git
 Vcs-Browser: https://github.com/grml/grml-paste
-Origin: Grml
-Bugs: mailto:bugs@grml.org
-Rules-Requires-Root: no
 
 Package: grml-paste
 Architecture: all
@@ -22,7 +23,8 @@ Depends:
  python3,
  ${misc:Depends},
  ${shlibs:Depends},
-Description: command line interface for paste.grml.org
+Description: command line interface for paste.debian.net
  This package provides a command line interface tool to upload
- plain text to https://paste.grml.org/ - being the official paste
- service for Grml.org.
+ plain text to https://paste.debian.net/ (the "Debian pastezone").
+ The interface is the same as was historically used for
+ paste.grml.org.
