@@ -3,7 +3,7 @@ grml-paste(1)
 
 Name
 ----
-grml-paste - command line interface for paste.grml.org
+grml-paste - command line interface for xmlrpc pastebins
 
 Synopsis
 --------
@@ -12,7 +12,7 @@ grml-paste [options] ACTION <args>
 Description
 -----------
 
-grml-paste is a command line interface for uploading plain text to https://paste.grml.org/
+grml-paste is a command line interface for uploading plain text to https://paste.debian.net/
 
 Options
 -------
@@ -35,7 +35,7 @@ Set your nickname (defaults to login username).
 
   **-s 'server', --server='SERVER'**::
 
-Set URL of paste server (defaults to paste.grml.org).
+Set URL of paste server (defaults to paste.debian.net).
 
   **-p, --private**::
 
