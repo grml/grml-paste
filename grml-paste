@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Filename:      grml-paste
-# Purpose:       XmlRpc interface client to paste.grml.org
+# Purpose:       XmlRpc Pastebin interface client
 # Author:        Michael Gebetsroither <gebi@grml.org>
 # License:       This file is licensed under the GPL v2.
 ################################################################################
