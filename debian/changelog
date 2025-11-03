@@ -1,3 +1,11 @@
+grml-paste (0.9.6) unstable; urgency=medium
+
+  * [0cc8831] Add README.md
+  * [3f0c42f] Clarify default server is paste.debian.net
+  * [97701e9] Add github workflows
+
+ -- Chris Hofstaedtler <ch@grml.org>  Mon, 03 Nov 2025 12:58:41 +0100
+
 grml-paste (0.9.5) unstable; urgency=medium
 
   * [99db8aa] Add minimal GitHub Actions build workflow
