@@ -37,6 +37,12 @@ sudo apt install ./grml-paste_*.deb
    echo hi | grml-paste
    ```
 
+## Token
+
+Authentication against the pastebin allows you to circumvent most of the AntiSpam checks and benefit from relaxed limits. To create a token you
+need to authenticate on https://paste.debian.net against salsa.debian.org. Afterwards you can use https://paste.debian.net/tokens to create and 
+manage your token. grml-paste accepts your token with the --token parameter.
+
 ## License
 
 This project is licensed under the GPL v2+.

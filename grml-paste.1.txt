@@ -3,7 +3,7 @@ grml-paste(1)
 
 Name
 ----
-grml-paste - command line interface for xmlrpc pastebins
+grml-paste - command line interface for pastebins
 
 Synopsis
 --------
@@ -37,9 +37,9 @@ Set your nickname (defaults to login username).
 
 Set URL of paste server (defaults to paste.debian.net).
 
-  **-p, --private**::
+  **-t 'token', --token='TOKEN'**::
 
-Make private (hidden) submission to server, thus your paste is not visible on the webpage.
+Use an API token for authentication. Users can create tokens on https://paste.debian.net/ by authenticating against salsa.debian.org. After logging in, you can manage your tokens at https://paste.debian.net/tokens. Using a token allows you to circumvent most of the service's strict spam checks (e.g., line break limits) and benefit from relaxed rate limits, which is especially useful for automated scripts or large pastes.
 
   **-v, --verbose**::
 
@@ -52,25 +52,13 @@ Actions
 
 Add paste to the server: <1.line> <2.line> ...
 
-  **del '<digest>'**::
+  **del '<id>'**::
 
 Delete paste from server.
 
  **get '<id>'**::
 
 Get paste from server.
-
- **addurl '<url>'**::
-
-Add short-URL.
-
- **geturl '<url>'**::
-
-Resolve short-URL.
-
- **getclicks '<url>'**::
-
-Get clicks of short-URL.
 
   **getlangs**::
 
@@ -87,9 +75,9 @@ Usage examples
 
 Upload last ten lines of dmesg output as user 'grmluser'.
 
-  **grep -e EE -e WW /var/log/Xorg.0.log | grml-paste add -p**::
+  **cat /var/log/syslog | grml-paste add --token=YOUR_SECRET_TOKEN**::
 
-Upload error and warning messages of X.org log as hidden entry.
+Upload syslog using an authentication token to bypass spam filters and size limits.
 
 Bugs
 ----
