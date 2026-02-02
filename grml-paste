@@ -1,18 +1,20 @@
 #!/usr/bin/python3
-# Filename:      grml-paste
-# Purpose:       XmlRpc Pastebin interface client
-# Author:        Michael Gebetsroither <gebi@grml.org>
-# License:       This file is licensed under the GPL v2.
+# Filename:		grml-paste
+# Purpose:		REST API Pastebin interface client
+# Author:		Michael Gebetsroither <gebi@grml.org>, Alexander Wirt <formorer@formorer.de>
+# License:		This file is licensed under the GPL v2.
 ################################################################################
 
 import getpass
 import inspect
 import optparse
 import sys
-from xmlrpc.client import ServerProxy
+import json
+import urllib.request
+import urllib.error
 
 # program defaults
-DEFAULT_SERVER = "https://paste.debian.net/server.pl"
+DEFAULT_SERVER = "https://paste.debian.net/api/v1"
 
 
 class ActionFailedException(Exception):
@@ -30,16 +32,42 @@ class ActionFailedException(Exception):
         return self.args[1]
 
 
-def _paste(opts):
-    """Get paste proxy object"""
-    return ServerProxy(opts.server, verbose=False).paste
+def _request(opts, endpoint, method="GET", data=None, headers=None):
+    """Make HTTP request to the API"""
+    if headers is None:
+        headers = {}
 
+    url = opts.server.rstrip("/") + endpoint
 
-def _check_success(return_data):
-    """Check if call was successful, raise ActionFailedException otherwise"""
-    if return_data["rc"] != 0:
-        raise ActionFailedException(return_data["statusmessage"], return_data)
-    return return_data
+    if data is not None:
+        body = json.dumps(data).encode("utf-8")
+        headers["Content-Type"] = "application/json"
+    else:
+        body = None
+
+    req = urllib.request.Request(
+        url, data=body, headers=headers, method=method)
+
+    try:
+        with urllib.request.urlopen(req) as response:
+            resp_data = response.read()
+            if not resp_data:
+                return {}
+            return json.loads(resp_data)
+    except urllib.error.HTTPError as e:
+        try:
+            err_data = json.loads(e.read())
+            # Extract messages from DefaultResponse errors array or simple error field
+            if "errors" in err_data:
+                msg = ", ".join([err.get("message", "Unknown error")
+                                for err in err_data.get("errors", [])])
+            elif "error" in err_data:
+                msg = err_data["error"]
+            else:
+                msg = str(e)
+        except:
+            msg = str(e)
+        raise ActionFailedException(msg, {"rc": 1, "statusmessage": msg})
 
 
 def action_add_paste(opts, code):
@@ -52,74 +80,81 @@ def action_add_paste(opts, code):
     if len(code) == 0:
         code = [line.rstrip() for line in sys.stdin.readlines()]
     code = "\n".join(code)
-    result = _check_success(
-        _paste(opts).addPaste(
-            code, opts.name, opts.expire * 3600, opts.lang, opts.private
-        )
-    )
-    return result["statusmessage"], result
+
+    payload = {
+        "code": code,
+        "poster": opts.name,
+        "expire": opts.expire * 3600,
+        "lang": opts.lang
+    }
+
+    # Check for token header
+    headers = {}
+    if opts.token:
+        headers["X-Paste-Token"] = opts.token
+
+    result = _request(opts, "/paste", method="POST",
+                      data=payload, headers=headers)
+
+    # Construct status message
+    msg = "Paste created: %s" % result.get("url")
+    if "digest" in result:
+        msg += "\nDigest: %s" % result.get("digest")
+
+    return msg, result
 
 
 def action_del_paste(opts, args):
-    """Delete paste from server: <digest>
+    """Delete paste from server: <id>
 
-    <digest>    Digest of paste you want to remove.
+    <id>        ID of paste you want to remove.
     """
-    digest = args.pop(0)
-    result = _check_success(_paste(opts).deletePaste(digest))
-    return result["statusmessage"], result
+    if not args:
+        raise ActionFailedException("Missing paste ID", {})
+
+    paste_id = args.pop(0)
+
+    headers = {}
+    if opts.token:
+        headers["X-Paste-Token"] = opts.token
+
+    result = _request(opts, "/paste/%s" %
+                      paste_id, method="DELETE", headers=headers)
+    return result.get("message", "Paste deleted"), result
 
 
 def action_get_paste(opts, args):
     """Get paste from server: <id>
 
-    <id>        Id of paste you want to receive.
+    <id>        ID of paste you want to receive.
     """
+    if not args:
+        raise ActionFailedException("Missing paste ID", {})
+
     paste_id = args.pop(0)
-    result = _check_success(_paste(opts).getPaste(paste_id))
+    result = _request(opts, "/paste/%s" % paste_id)
     return result["code"], result
 
 
 def action_get_langs(opts, args):
     """Get supported language highlighting types from server"""
-    result = _check_success(_paste(opts).getLanguages())
-    return "\n".join(result["langs"]), result
-
-
-def action_add_short_url(opts, args):
-    """Add short-URL: <url>
-
-    <url>        Short-URL to add
-    """
-    url = args.pop(0)
-    result = _check_success(_paste(opts).addShortURL(url))
-    return result["url"], result
-
-
-def action_get_short_url(opts, args):
-    """Resolve short-URL: <url>
-
-    <url>        Short-URL to get clicks of
-    """
-    url = args.pop(0)
-    result = _check_success(_paste(opts).resolveShortURL(url))
-    return result["url"], result
-
-
-def action_get_short_url_clicks(opts, args):
-    """Get clicks of short-URL: <url>
-
-    <url>        Short-URL to get clicks of
-    """
-    url = args.pop(0)
-    result = _check_success(_paste(opts).ShortURLClicks(url))
-    return result["count"], result
+    result = _request(opts, "/langs")
+    # API returns list of objects {id, code, desc}
+    langs = []
+    for l in result:
+        code = l.get("code")
+        desc = l.get("desc")
+        if code == desc:
+            langs.append(code)
+        else:
+            langs.append("%s: %s" % (code, desc))
+    return "\n".join(langs), result
 
 
 def action_help(opts, args):
     """Print more verbose help about specific action: <action>
 
-    <action>    Topic on which you need more verbose help.
+    <action>	Topic on which you need more verbose help.
     """
     if len(args) < 1:
         alias = "help"
@@ -159,9 +194,6 @@ if __name__ == "__main__":
         "action_del_paste del d rm",
         "action_get_paste get g",
         "action_get_langs getlangs gl langs l",
-        "action_add_short_url addurl",
-        "action_get_short_url geturl",
-        "action_get_short_url_clicks getclicks",
         "action_help     help",
     ]
     for action_spec in action_specs:
@@ -185,7 +217,8 @@ if __name__ == "__main__":
     )
     running_user = getpass.getuser()
     parser = optparse.OptionParser(usage=usage)
-    parser.add_option("-n", "--name", default=running_user, help="Name of poster")
+    parser.add_option("-n", "--name", default=running_user,
+                      help="Name of poster")
     parser.add_option(
         "-e",
         "--expire",
@@ -195,18 +228,19 @@ if __name__ == "__main__":
         help="Time at which paste should expire",
     )
     parser.add_option(
-        "-l", "--lang", default="Plain", help="Type of language to highlight"
+        "-l", "--lang", default="text", help="Language for syntax highlighting (default: text)"
     )
     parser.add_option(
-        "-p",
-        "--private",
-        action="count",
-        dest="private",
-        default=0,
-        help="Create hidden paste",
-    ),
-    parser.add_option("-s", "--server", default=DEFAULT_SERVER, help="Paste server")
-    parser.add_option("-v", "--verbose", action="count", default=0, help="More output")
+        "-t",
+        "--token",
+        dest="token",
+        default=None,
+        help="X-Paste-Token for authentication",
+    )
+    parser.add_option("-s", "--server",
+                      default=DEFAULT_SERVER, help="Paste server")
+    parser.add_option("-v", "--verbose", action="count",
+                      default=0, help="More output")
     (opts, args) = parser.parse_args()
     OPT_PARSER = parser
 
