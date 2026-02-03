@@ -1,3 +1,11 @@
+grml-paste (0.9.8) unstable; urgency=medium
+
+  [ Alexander Wirt ]
+  * [fb3c591] Implement new paste.debian.net API
+  * [ba9abd1] Improve documentation about token usage
+
+ -- Chris Hofstaedtler <ch@grml.org>  Tue, 03 Feb 2026 14:02:25 +0100
+
 grml-paste (0.9.7) unstable; urgency=medium
 
   * CI changes only. Sync to Debian.
