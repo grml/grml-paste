@@ -16,6 +16,7 @@ Rules-Requires-Root: no
 Homepage: https://github.com/grml/grml-paste
 Vcs-Git: https://github.com/grml/grml-paste.git
 Vcs-Browser: https://github.com/grml/grml-paste
+X-Style: black
 
 Package: grml-paste
 Architecture: all
