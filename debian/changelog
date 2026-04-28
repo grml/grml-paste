@@ -1,3 +1,9 @@
+grml-paste (0.9.9) unstable; urgency=medium
+
+  * CI changes only. Sync to Debian.
+
+ -- Chris Hofstaedtler <ch@grml.org>  Tue, 28 Apr 2026 16:34:00 +0200
+
 grml-paste (0.9.8) unstable; urgency=medium
 
   [ Alexander Wirt ]
